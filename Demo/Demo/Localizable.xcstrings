@@ -1,0 +1,306 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "@username • 2h • Following" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@username • منذ ساعتين • متابعة"
+          }
+        }
+      }
+    },
+    "⚡ Super fast scrolling text with custom timing parameters for maximum impact! ⚡" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚡ نص متحرك فائق السرعة مع معاملات توقيت مخصصة لأقصى تأثير! ⚡"
+          }
+        }
+      }
+    },
+    "🚀 This is a spectacular marquee text that scrolls beautifully across the screen with smooth animations and perfect timing! ✨" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🚀 هذا نص متحرك مذهل يتدفق بجمال عبر الشاشة مع رسوم متحركة سلسة وتوقيت مثالي! ✨"
+          }
+        }
+      }
+    },
+    "🚨 Major breakthrough in AI technology announced today • Scientists discover new method for quantum computing • Stock markets reach all-time high • Weather forecast: Sunny skies expected for the weekend" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🚨 إنجاز عظيم في تكنولوجيا الذكاء الاصطناعي أُعلن اليوم • العلماء يكتشفون طريقة جديدة للحوسبة الكمية • الأسواق المالية تصل لأعلى مستوى في التاريخ • توقعات الطقس: سماء صافية متوقعة لعطلة نهاية الأسبوع"
+          }
+        }
+      }
+    },
+    "🟢 System Online • All services operational • Last backup: 2 minutes ago • CPU: 23% • Memory: 4.2GB • Disk: 78% free" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🟢 النظام متصل • جميع الخدمات تعمل • آخر نسخة احتياطية: منذ دقيقتين • المعالج: 23% • الذاكرة: 4.2 جيجابايت • القرص: 78% متاح"
+          }
+        }
+      }
+    },
+    "$" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "$"
+          }
+        }
+      }
+    },
+    "BREAKING" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عاجل"
+          }
+        }
+      }
+    },
+    "Custom Timing" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إعدادات التوقيت المخصصة"
+          }
+        }
+      }
+    },
+    "git add . && git commit -m 'Add comprehensive marquee text component with smooth animations' && git push origin main" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "git add . && git commit -m 'إضافة مكون النص المتحرك الشامل مع الرسوم المتحركة السلسة' && git push origin main"
+          }
+        }
+      }
+    },
+    "Hey! I just saw your latest project on GitHub. The marquee text component looks incredible! Can we schedule a call to discuss potential collaboration?" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرحباً! شاهدت للتو مشروعك الأخير على GitHub. مكون النص المتحرك يبدو مذهلاً! هل يمكننا تحديد موعد مكالمة لمناقشة إمكانية التعاون؟"
+          }
+        }
+      }
+    },
+    "Just discovered this amazing SwiftUI marquee text component! The animations are so smooth and the API is incredibly clean. Perfect for music players, news tickers, and status displays. #SwiftUI #iOS #OpenSource" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتشفت للتو هذا المكون المذهل للنص المتحرك في SwiftUI! الرسوم المتحركة سلسة جداً والـ API نظيف بشكل لا يصدق. مثالي لمشغلات الموسيقى وشرائط الأخبار وعروض الحالة. #SwiftUI #iOS #OpenSource"
+          }
+        }
+      }
+    },
+    "Loading Screen" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شاشة التحميل"
+          }
+        }
+      }
+    },
+    "Loading your personalized experience • Fetching latest updates • Preparing content • Almost ready..." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحميل تجربتك الشخصية • جلب أحدث التحديثات • إعداد المحتوى • تقريباً جاهز..."
+          }
+        }
+      }
+    },
+    "Main Showcase" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "العرض الرئيسي"
+          }
+        }
+      }
+    },
+    "MarqueeText" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "النص المتحرك"
+          }
+        }
+      }
+    },
+    "Music Player Style" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمط مشغل الموسيقى"
+          }
+        }
+      }
+    },
+    "New message from Sarah Johnson" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسالة جديدة من سارة أحمد"
+          }
+        }
+      }
+    },
+    "News Ticker Style" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمط شريط الأخبار"
+          }
+        }
+      }
+    },
+    "Notification Banner" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شريط الإشعارات"
+          }
+        }
+      }
+    },
+    "Now Playing: Bohemian Rhapsody - Queen (Live at Wembley Stadium 1985)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يُعرض الآن: أنت عمري - أم كلثوم (حفل القاهرة 1964)"
+          }
+        }
+      }
+    },
+    "Queen • A Night at the Opera • 1975 • Rock • 5:55" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أم كلثوم • أنت عمري • 1964 • موسيقى عربية • 7:23"
+          }
+        }
+      }
+    },
+    "Short Text (Static)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نص قصير (ثابت)"
+          }
+        }
+      }
+    },
+    "Smooth • Responsive • Customizable" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سلس • متجاوب • قابل للتخصيص"
+          }
+        }
+      }
+    },
+    "Smooth horizontal scrolling text for SwiftUI" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نص متحرك أفقي سلس لـ SwiftUI"
+          }
+        }
+      }
+    },
+    "Social Media Feed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خلاصة وسائل التواصل الاجتماعي"
+          }
+        }
+      }
+    },
+    "Status Bar Style" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمط شريط الحالة"
+          }
+        }
+      }
+    },
+    "swift build && swift test && xcodebuild -scheme MarqueeText -destination 'platform=iOS Simulator,name=iPhone 15' build" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "swift build && swift test && xcodebuild -scheme MarqueeText -destination 'platform=iOS Simulator,name=iPhone 15' build"
+          }
+        }
+      }
+    },
+    "Terminal/Console" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الطرفية/وحدة التحكم"
+          }
+        }
+      }
+    },
+    "This text is short" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هذا النص قصير"
+          }
+        }
+      }
+    },
+    "U" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}
