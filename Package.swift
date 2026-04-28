@@ -19,6 +19,10 @@ let package = Package(
   targets: [
     .target(
       name: "MarqueeText"
+    ),
+    .testTarget(
+      name: "MarqueeTextTests",
+      dependencies: ["MarqueeText"]
     )
   ]
 )

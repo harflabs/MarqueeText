@@ -5,9 +5,9 @@ A lightweight SwiftUI component that automatically creates marquee scrolling ani
 ## Features
 
 - 🎯 **Automatic Detection** - Only scrolls when text overflows
-- ⚡️ **Smooth Animations** - Customizable timing and easing
+- ⚡️ **Smooth Animations** - Customizable duration, delay, and spacing
 - 🎨 **SwiftUI Native** - Built with pure SwiftUI
-- ♿️ **Accessible** - Full accessibility support
+- ♿️ **Accessible** - VoiceOver-friendly labels with Reduce Motion support
 - ↔️ **Localizable** - Supports `LocalizedStringResource` and right to left layouts.
 - 📱 **Multi-Platform** - iOS, macOS, tvOS, and visionOS
 
@@ -45,6 +45,15 @@ import MarqueeText
 MarqueeText("This is a long text that will scroll smoothly across the screen!")
 ```
 
+String literals use SwiftUI's localized string resource behavior. For runtime strings, such as titles from an API,
+use the verbatim initializer:
+
+```swift
+let title = "Now Playing: Bohemian Rhapsody - Queen"
+
+MarqueeText(verbatim: title)
+```
+
 ### Custom Timing
 
 ```swift
@@ -55,6 +64,8 @@ MarqueeText(
     spacing: 30       // Space between repeated text
 )
 ```
+
+Invalid duration, delay, and spacing values are clamped to safe defaults.
 
 ### With Styling
 
@@ -69,6 +80,11 @@ MarqueeText("Styled marquee text")
           .fill(.ultraThinMaterial)
     )
 ```
+
+### Accessibility
+
+`MarqueeText` exposes a single accessibility label for the full text. When Reduce Motion is enabled, overflowing
+text is shown without the continuous marquee animation.
 
 ## Examples
 
