@@ -5,7 +5,7 @@ import SwiftUI
 ///
 /// `MarqueeText` measures both the rendered text and the available container width. Text that fits is shown
 /// statically, while overflowing text is duplicated and animated so the label can loop continuously. The view
-/// responds to layout, font, Dynamic Type, locale, and accessibility changes that affect the measured sizes.
+/// responds to layout, font, Dynamic Type, locale, right-to-left layout direction, and Reduce Motion changes.
 public struct MarqueeText: View {
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @Environment(\.layoutDirection) private var layoutDirection
