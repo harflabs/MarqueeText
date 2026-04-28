@@ -5,10 +5,10 @@ A lightweight SwiftUI component that automatically creates marquee scrolling ani
 ## Features
 
 - 🎯 **Automatic Detection** - Only scrolls when text overflows
-- ⚡️ **Smooth Animations** - Customizable timing and easing
+- ⚡️ **Smooth Animations** - Customizable duration, delay, and spacing
 - 🎨 **SwiftUI Native** - Built with pure SwiftUI
-- ♿️ **Accessible** - Full accessibility support
-- ↔️ **Localizable** - Supports `LocalizedStringResource` and right to left layouts.
+- ♿️ **Accessible** - VoiceOver-friendly labels with Reduce Motion support
+- ↔️ **Localizable** - Supports `LocalizedStringResource` and right-to-left layouts
 - 📱 **Multi-Platform** - iOS, macOS, tvOS, and visionOS
 
 ## Requirements
@@ -26,7 +26,7 @@ Add the following to your `Package.swift` file:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/harflabs/MarqueeText.git", from: "1.0.0")
+    .package(url: "https://github.com/harflabs/MarqueeText.git", from: "1.1.0")
 ]
 ```
 
@@ -45,6 +45,25 @@ import MarqueeText
 MarqueeText("This is a long text that will scroll smoothly across the screen!")
 ```
 
+String literals use SwiftUI's localized string resource behavior. For runtime strings, such as titles from an API,
+you can pass a `String` value directly or use the explicit verbatim initializer when you want to make that intent
+clear:
+
+```swift
+let title = "Now Playing: Bohemian Rhapsody - Queen"
+
+MarqueeText(title)
+MarqueeText(verbatim: title)
+```
+
+### Layout Behavior
+
+`MarqueeText` measures the rendered text and available width, so short text stays static and overflowing text scrolls.
+It remeasures when SwiftUI layout changes, including font, Dynamic Type, locale, and container size updates. This keeps
+the marquee responsive in lists, stacks, compact controls, and during device rotation.
+
+Right-to-left layout direction mirrors the marquee alignment and scroll direction.
+
 ### Custom Timing
 
 ```swift
@@ -55,6 +74,8 @@ MarqueeText(
     spacing: 30       // Space between repeated text
 )
 ```
+
+Invalid duration, delay, and spacing values are clamped to safe defaults.
 
 ### With Styling
 
@@ -69,6 +90,22 @@ MarqueeText("Styled marquee text")
           .fill(.ultraThinMaterial)
     )
 ```
+
+### Accessibility
+
+`MarqueeText` exposes a single accessibility label for the full text. When Reduce Motion is enabled, overflowing
+text is shown without the continuous marquee animation.
+
+## Testing
+
+Run the regression suite with:
+
+```bash
+swift test --enable-code-coverage
+```
+
+The test suite covers overflow detection, text and layout updates, right-to-left layout, Reduce Motion, invalid sizing
+inputs, and redraw-heavy animation timing.
 
 ## Examples
 
