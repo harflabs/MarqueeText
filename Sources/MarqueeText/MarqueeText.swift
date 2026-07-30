@@ -137,7 +137,7 @@ public struct MarqueeText: View {
     .contentShape(Rectangle())
     .onPreferenceChange(MarqueeMeasurementPreferenceKey.self, perform: updateMeasurement)
     // Keep the measurement preference private to this view so ancestors are not invalidated by it.
-    .transformPreference(MarqueeMeasurementPreferenceKey.self) { $0 = .zero }
+    .transformPreference(MarqueeMeasurementPreferenceKey.self) { $0 = nil }
     .onAppear { restartAnimation(shouldAnimate: layout.shouldScroll) }
     .onChange(of: layout.animationIdentity) { _ in
       restartAnimation(shouldAnimate: layout.shouldScroll)
@@ -181,8 +181,8 @@ public struct MarqueeText: View {
     }
   }
 
-  func updateMeasurement(_ newValue: MarqueeMeasurement) {
-    guard measurement != newValue else { return }
+  func updateMeasurement(_ newValue: MarqueeMeasurement?) {
+    guard let newValue, measurement != newValue else { return }
 
     measurement = newValue
   }

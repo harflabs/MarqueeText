@@ -1,16 +1,18 @@
 import SwiftUI
 
+/// Carries the probe's measurement, using `nil` to mean "this subtree did not measure anything".
+///
+/// SwiftUI folds every child of a container into the preference, including children that never write one
+/// and therefore contribute `defaultValue`. Those must not clear a real measurement. Distinguishing "no
+/// contribution" (`nil`) from "measured, and the answer is zero" (`.some(.zero)`) is what lets a genuinely
+/// empty measurement still overwrite an earlier one, instead of leaving stale widths behind.
 struct MarqueeMeasurementPreferenceKey: PreferenceKey {
-  static var defaultValue: MarqueeMeasurement {
-    .zero
+  static var defaultValue: MarqueeMeasurement? {
+    nil
   }
 
-  static func reduce(value: inout MarqueeMeasurement, nextValue: () -> MarqueeMeasurement) {
-    let next = nextValue()
-
-    // SwiftUI folds every child of a container into the preference, including children that never write
-    // one and therefore contribute `defaultValue`. Those must not clear a real measurement.
-    guard next != .zero else { return }
+  static func reduce(value: inout MarqueeMeasurement?, nextValue: () -> MarqueeMeasurement?) {
+    guard let next = nextValue() else { return }
 
     value = next
   }
@@ -24,7 +26,7 @@ struct MarqueeMeasurementReader: View {
         .allowsHitTesting(false)
         .preference(
           key: MarqueeMeasurementPreferenceKey.self,
-          value: MarqueeMeasurement(probeSize: geometry.size)
+          value: MarqueeMeasurement(probeSize: geometry.size) as MarqueeMeasurement?
         )
     }
   }

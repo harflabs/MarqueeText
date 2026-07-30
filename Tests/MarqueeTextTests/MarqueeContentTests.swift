@@ -132,6 +132,8 @@ struct MarqueeContentTests {
     )
 
     view.updateMeasurement(MarqueeMeasurement(textWidth: 80, containerWidth: 40))
+    // An absent contribution must be ignored rather than treated as a measurement of zero.
+    view.updateMeasurement(nil)
   }
 
   @Test
