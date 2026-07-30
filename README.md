@@ -1,5 +1,7 @@
 # MarqueeText
 
+[![Tests](https://github.com/harflabs/MarqueeText/actions/workflows/test.yml/badge.svg)](https://github.com/harflabs/MarqueeText/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/harflabs/MarqueeText/branch/main/graph/badge.svg)](https://codecov.io/gh/harflabs/MarqueeText)
 [![Swift versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fharflabs%2FMarqueeText%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/harflabs/MarqueeText)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fharflabs%2FMarqueeText%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/harflabs/MarqueeText)
 [![License](https://img.shields.io/github/license/harflabs/MarqueeText)](LICENSE)

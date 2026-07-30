@@ -1,0 +1,156 @@
+name: Tests
+
+# Run once per change, not twice. `on: [push, pull_request]` would fire
+# both events whenever a PR branch is pushed (push → `refs/heads/<branch>`,
+# pull_request → `refs/pull/<n>/merge`), doubling CI minutes. Restricting
+# `push` to `main` means branch pushes only run under the PR; `main` still
+# gets CI on direct pushes / merges.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same branch so stale pushes don't burn billing.
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Style and formatting gate. Cheap and runs in parallel with the test job,
+  # so a style violation surfaces immediately instead of after the suite.
+  # Configs live in `.swiftlint.yml` and `.swiftformat`; both run with
+  # --strict so warnings are treated as errors.
+  lint:
+    runs-on: macos-26
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        timeout-minutes: 2
+
+      - name: Install swiftlint and swiftformat
+        timeout-minutes: 5
+        run: |
+          brew update >/dev/null
+          brew install swiftlint swiftformat
+          swiftlint --version
+          swiftformat --version
+
+      # Scoped to the library and its tests. `Demo/` is sample code carrying
+      # deliberately long marquee strings, and is excluded in `.swiftlint.yml`.
+      - name: SwiftLint
+        timeout-minutes: 2
+        run: swiftlint lint --strict --quiet Sources Tests
+
+      - name: SwiftFormat
+        timeout-minutes: 2
+        run: swiftformat Sources Tests --lint --strict
+
+  # Test + coverage gate. `swift test` on the macOS host is what produces the
+  # coverage profile; the platform build matrix below covers the slices this
+  # job cannot compile.
+  test:
+    # Xcode's package-graph resolver checks Package.swift's tools-version with
+    # Xcode's built-in SwiftPM, not a separately installed toolchain. This
+    # manifest requires Swift 6.2, so the image needs Xcode 26+.
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        timeout-minutes: 2
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        timeout-minutes: 5
+        with:
+          xcode-version: latest-stable
+
+      - name: Print toolchain
+        timeout-minutes: 1
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Run tests with coverage
+        timeout-minutes: 10
+        run: swift test --enable-code-coverage
+
+      # SwiftPM emits an indexed `.profdata`, which Codecov cannot read, so it
+      # has to be converted to LCOV. Paths are derived from
+      # `swift build --show-bin-path` rather than hard-coded, because the build
+      # directory is architecture-specific (e.g. `arm64-apple-macosx/debug`).
+      - name: Export coverage report
+        timeout-minutes: 2
+        run: |
+          set -euo pipefail
+          bin_dir="$(swift build --show-bin-path)"
+          profdata="$bin_dir/codecov/default.profdata"
+          test_bundle="$(find "$bin_dir" -maxdepth 1 -name '*.xctest' -type d -print | head -n 1)"
+
+          if [[ ! -f "$profdata" || -z "$test_bundle" ]]; then
+            echo "::error::Could not find coverage profile or test bundle under $bin_dir." >&2
+            exit 1
+          fi
+
+          test_binary="$test_bundle/Contents/MacOS/$(basename "$test_bundle" .xctest)"
+
+          xcrun llvm-cov export \
+            -format=lcov \
+            "$test_binary" \
+            -instr-profile "$profdata" \
+            --ignore-filename-regex='(/\.build/|/Tests/)' \
+            > coverage.lcov
+
+          # An empty or headerless report uploads "successfully" and silently
+          # reports zero coverage, so fail loudly here instead.
+          if [[ ! -s coverage.lcov ]] || ! grep -q '^SF:' coverage.lcov; then
+            echo "::error::Generated LCOV report is empty or invalid." >&2
+            exit 1
+          fi
+
+          echo "Covered files:"
+          grep '^SF:' coverage.lcov
+
+      # The repository is public and the organisation allows tokenless uploads,
+      # so `CODECOV_TOKEN` is optional; the step still passes it when present.
+      # `fail_ci_if_error` stays false deliberately: a Codecov outage should not
+      # turn the Tests badge red when the tests themselves passed.
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        timeout-minutes: 5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.lcov
+          fail_ci_if_error: false
+
+  # Cross-platform compile gate. `swift test` above only ever compiles the
+  # macOS slice, so a break confined to another platform's SDK would otherwise
+  # reach main unseen. Building every declared platform is what keeps the
+  # `platforms:` list in Package.swift honest.
+  build:
+    name: Build (${{ matrix.platform }})
+    runs-on: macos-26
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [iOS, macOS, tvOS, visionOS, watchOS]
+    steps:
+      - uses: actions/checkout@v6
+        timeout-minutes: 2
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        timeout-minutes: 5
+        with:
+          xcode-version: latest-stable
+
+      - name: Build for ${{ matrix.platform }}
+        timeout-minutes: 15
+        run: |
+          xcodebuild build \
+            -scheme MarqueeText \
+            -destination "generic/platform=${{ matrix.platform }}" \
+            -configuration Debug \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO

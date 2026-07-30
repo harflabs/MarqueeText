@@ -1,0 +1,35 @@
+# Codecov configuration for MarqueeText.
+#
+# Coverage comes from a single `swift test --enable-code-coverage` run on a
+# headless macOS CI host (see .github/workflows/test.yml → the `test` job).
+# Everything in Sources/ is measurable there: the package has no system or
+# device dependencies, and the SwiftUI layout logic is exercised either
+# directly or through a real hosting view.
+
+coverage:
+  status:
+    # Overall coverage is an enforced, blocking check. The suite currently
+    # covers ~95% of regions, so a regression should fail rather than drift.
+    project:
+      default:
+        target: auto
+        # Tolerate sub-percent noise from non-deterministic line attribution
+        # between runs; a real drop trips the check.
+        threshold: 1%
+
+    # New executable lines must stay well tested. The gap below 100%
+    # accommodates SwiftUI `body` builders, whose branches are not all
+    # reachable from a headless test process.
+    patch:
+      default:
+        target: 85%
+        threshold: 0%
+
+# Belt-and-suspenders: the LCOV export in the test job already strips Tests/
+# and .build/, and Demo/ builds from a separate Xcode project that never feeds
+# coverage. Listing them keeps Codecov's bookkeeping aligned with what is
+# actually uploaded.
+ignore:
+  - "Tests"
+  - "Demo"
+  - ".build"
